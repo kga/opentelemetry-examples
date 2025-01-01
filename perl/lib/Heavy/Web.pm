@@ -16,11 +16,7 @@ sub superHeavyFunc($tracer, $n) {
 		"Heavy func $n" => sub ($span, $ctx) {
 			Time::HiRes::sleep($n);
 
-			if ($n > 5) {
-				my $msg = 'timeout!';
-				$span->record_exception($msg);
-				$span->set_status(OpenTelemetry::Constants::SPAN_STATUS_ERROR, $msg);
-			}
+			die "timeout!" if $n > 5;
 		},
 	)
 }
