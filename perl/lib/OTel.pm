@@ -5,13 +5,17 @@ use utf8;
 use OpenTelemetry;
 use OpenTelemetry::SDK;
 use OpenTelemetry::SDK::Exporter::Console;
-use OpenTelemetry::SDK::Trace::Span::Processor::Simple;
+use OpenTelemetry::Exporter::OTLP;
 
-OpenTelemetry->tracer_provider->add_span_processor(
-    OpenTelemetry::SDK::Trace::Span::Processor::Simple->new(
-        exporter => OpenTelemetry::SDK::Exporter::Console->new,
-    ),
+use OpenTelemetry::SDK::Trace::Span::Processor::Simple;
+use OpenTelemetry::SDK::Trace::Span::Processor::Batch;
+
+my $processor = OpenTelemetry::SDK::Trace::Span::Processor::Simple->new(
+    exporter => OpenTelemetry::Exporter::OTLP->new,
+#	exporter => OpenTelemetry::SDK::Exporter::Console->new,
 );
+
+OpenTelemetry->tracer_provider->add_span_processor($processor);
 
 sub init {
 	my $provider = OpenTelemetry->tracer_provider;

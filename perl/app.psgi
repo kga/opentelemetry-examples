@@ -6,4 +6,7 @@ use lib "$FindBin::Bin/lib";
 
 use Heavy::Web;
 
+warn $ENV{OTEL_SERVICE_NAME};
+warn $ENV{EXPORTER_OTLP_ENDPOINT};
+
 Heavy::Web->psgi;
