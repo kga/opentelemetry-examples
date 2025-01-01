@@ -3,8 +3,6 @@ require 'opentelemetry/exporter/otlp'
 require 'opentelemetry/instrumentation/rack'
 require 'rack'
 require 'rackup'
-require 'net/http'
-require 'json'
 
 def init_tracer_provider
 	exporter = OpenTelemetry::Exporter::OTLP::Exporter.new
