@@ -2,9 +2,6 @@ package Heavy::Web;
 use v5.40;
 use utf8;
 
-use feature 'defer';
-no warnings 'experimental::defer';
-
 use Kossy;
 use Time::HiRes ();
 
